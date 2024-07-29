@@ -18,20 +18,36 @@ public class Main {
         int[] eLocation;
         List<List<Integer>> connectingNodes;
         sLocation = findS(myarray);
-        System.out.println(myarray[sLocation[0]][sLocation[1]+1]);
-        System.out.println(myarray[sLocation[0]][sLocation[1]-1]);
-        System.out.println(myarray[sLocation[0]+1][sLocation[1]]);
-        System.out.println(myarray[sLocation[0]-1][sLocation[1]+1]);
+        ;
+
+
 
 
 
 
     }
 
-//    public static List<List<Integer>> solve(int[]sLocation, char[][] maze) {
-//
-//
-//    }
+    public static int[] findNextNode(int[]checkAround, char[][]maze) {
+
+        int y = checkAround[0];
+        int x = checkAround[1];
+
+        if (maze[y][x+1] == ' '){
+            return new int[]{y, x+1};
+        }
+
+        if (maze[y][x-1] == ' '){
+            return new int[]{y, x-1};
+        }
+        if (maze[y+1][x] == ' '){
+            return new int[]{y+1, x};
+        }
+        if (maze[y-1][x] == ' '){
+            return new int[]{y-1, x};
+        }
+          return null;
+    }
+
 
 
     public static int[] findS(char[][] maze){
