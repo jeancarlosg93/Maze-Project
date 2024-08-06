@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48415258-17c1-4a48-b2e4-3785a3e82177" name="Changes" comment="created methods to find S and E">
-      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FindNextNode.java" afterDir="false" />
+    <list default="true" id="48415258-17c1-4a48-b2e4-3785a3e82177" name="Changes" comment="explore neighbors">
+      <change afterPath="$PROJECT_DIR$/src/Node.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Point.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Stack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -34,7 +35,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/jeancarlosg93/Maze-Project.git&quot;,
-    &quot;accountId&quot;: &quot;621113f8-f4f4-48b4-b96e-c5d63ca29474&quot;
+    &quot;accountId&quot;: &quot;6dd87fea-5966-4170-b076-7a95e2af88e7&quot;
   }
 }</component>
   <component name="MacroExpansionManager">
@@ -54,23 +55,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/jeanc/Code/Maze traversing project/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/jeanc/Code/Maze traversing project/src/Main.java",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="QodanaReportsService">
     <option name="descriptions">
       <ReportDescription localRun="true" path="C:\Users\jeanc\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="4c4440ba-efc5-4b5d-b1b6-b01d83ce9732" reportId="Maze-Project/qodana/2024-07-28" />
@@ -97,9 +98,11 @@
       <workItem from="1721828083960" duration="8575000" />
       <workItem from="1721849427698" duration="203000" />
       <workItem from="1722125296615" duration="259000" />
-      <workItem from="1722190745616" duration="4085000" />
+      <workItem from="1722190745616" duration="9457000" />
       <workItem from="1722206147229" duration="3919000" />
       <workItem from="1722210106112" duration="2697000" />
+      <workItem from="1722887467321" duration="1925000" />
+      <workItem from="1722891969471" duration="15168000" />
     </task>
     <task id="LOCAL-00001" summary="created methods to find S and E">
       <option name="closed" value="true" />
@@ -109,7 +112,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721849581987</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="explore neighbors">
+      <option name="closed" value="true" />
+      <created>1722202167477</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1722202167477</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,7 +128,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="created methods to find S and E" />
-    <option name="LAST_COMMIT_MESSAGE" value="created methods to find S and E" />
+    <MESSAGE value="explore neighbors" />
+    <option name="LAST_COMMIT_MESSAGE" value="explore neighbors" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="16" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
