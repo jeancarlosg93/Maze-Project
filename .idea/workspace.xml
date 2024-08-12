@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48415258-17c1-4a48-b2e4-3785a3e82177" name="Changes" comment="explore neighbors">
-      <change afterPath="$PROJECT_DIR$/src/Node.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Point.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Stack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project instructions.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -35,7 +33,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/jeancarlosg93/Maze-Project.git&quot;,
-    &quot;accountId&quot;: &quot;6dd87fea-5966-4170-b076-7a95e2af88e7&quot;
+    &quot;accountId&quot;: &quot;621113f8-f4f4-48b4-b96e-c5d63ca29474&quot;
   }
 }</component>
   <component name="MacroExpansionManager">
@@ -57,17 +55,19 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Run",
+    "Application.Main.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/jeanc/IdeaProjects/Maze-Project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/jeanc/Code/Maze traversing project/src/Main.java",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
@@ -77,11 +77,16 @@
       <ReportDescription localRun="true" path="C:\Users\jeanc\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="4c4440ba-efc5-4b5d-b1b6-b01d83ce9732" reportId="Maze-Project/qodana/2024-07-28" />
     </option>
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jeanc\IdeaProjects\Maze-Project" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.300" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.300" />
       </set>
     </attachedChunks>
   </component>
@@ -103,6 +108,12 @@
       <workItem from="1722210106112" duration="2697000" />
       <workItem from="1722887467321" duration="1925000" />
       <workItem from="1722891969471" duration="15168000" />
+      <workItem from="1722964760707" duration="561000" />
+      <workItem from="1723131576208" duration="635000" />
+      <workItem from="1723135437579" duration="594000" />
+      <workItem from="1723140189981" duration="4000" />
+      <workItem from="1723172750825" duration="30000" />
+      <workItem from="1723475668730" duration="1582000" />
     </task>
     <task id="LOCAL-00001" summary="created methods to find S and E">
       <option name="closed" value="true" />
@@ -138,6 +149,11 @@
           <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="16" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
