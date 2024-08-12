@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48415258-17c1-4a48-b2e4-3785a3e82177" name="Changes" comment="explore neighbors">
-      <change afterPath="$PROJECT_DIR$/Project instructions.md" afterDir="false" />
+    <list default="true" id="48415258-17c1-4a48-b2e4-3785a3e82177" name="Changes" comment="Added Project instructions.md">
+      <change afterPath="$PROJECT_DIR$/maze" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FileReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -113,7 +114,7 @@
       <workItem from="1723135437579" duration="594000" />
       <workItem from="1723140189981" duration="4000" />
       <workItem from="1723172750825" duration="30000" />
-      <workItem from="1723475668730" duration="1582000" />
+      <workItem from="1723475668730" duration="3468000" />
     </task>
     <task id="LOCAL-00001" summary="created methods to find S and E">
       <option name="closed" value="true" />
@@ -131,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722202167477</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added Project instructions.md">
+      <option name="closed" value="true" />
+      <created>1723477366896</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1723477366896</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,7 +149,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="created methods to find S and E" />
     <MESSAGE value="explore neighbors" />
-    <option name="LAST_COMMIT_MESSAGE" value="explore neighbors" />
+    <MESSAGE value="Added Project instructions.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Project instructions.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -151,8 +161,13 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>88</line>
+          <line>91</line>
           <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>5</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

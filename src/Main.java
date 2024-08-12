@@ -1,7 +1,9 @@
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+       char[][] maze3  = FileReader.readFile("maze");
 
         char[][] maze1 = {
                 {'|', '|', '|', '|', '|',},
@@ -24,13 +26,14 @@ public class Main {
                 };
 
 
-        Point S = findS(maze);
-        Point E = findE(maze);
-        Stack<Point> path = solve(maze, '|', S, E);
+
+        Point S = findS(maze3);
+        Point E = findE(maze3);
+        Stack<Point> path = solve(maze3, '|', S, E);
 
         if (path != null) {
             System.out.println("Path found!");
-            for (char[] row : maze) {
+            for (char[] row : maze3) {
                 System.out.println(new String(row));
             }
         } else {
