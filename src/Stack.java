@@ -1,8 +1,8 @@
-public  class Stack<T> {
-     Node<T> head;
-     int size;
+public class Stack<T> {
+    Node<T> head;
+    int size;
 
-    public  Stack() {
+    public Stack() {
         head = null;
         size = 0;
     }
@@ -15,25 +15,25 @@ public  class Stack<T> {
     }
 
     public T pop() {
-      if (isEmpty()){
-          return null;
-      }
+        if (isEmpty()) {
+            return null;
+        }
 
-      T item = head.getData();
-      head = head.getPrev();
-      size--;
-      return item;
+        T item = head.getData();
+        head = head.getPrev();
+        size--;
+        return item;
     }
 
-    public T peek(){
-        return isEmpty()?null:head.getData();
+    public T peek() {
+        return isEmpty() ? null : head.getData();
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 

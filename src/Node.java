@@ -8,15 +8,18 @@ public class Node<T> {
         setPrev(null);
     }
 
-    public  void setData(T data) {
+    public void setData(T data) {
         this.data = data;
     }
+
     public T getData() {
         return data;
     }
+
     public void setPrev(Node<T> prev) {
         this.prev = prev;
     }
+
     public Node<T> getPrev() {
         return prev;
     }
