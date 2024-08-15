@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,18 +28,19 @@ public class Main {
 
 
 
-        Point S = findS(maze3);
-        Point E = findE(maze3);
-        Stack<Point> path = solve(maze3, '|', S, E);
+        Point S = findS(maze);
+        Point E = findE(maze);
+        List<Point> points = solve(maze,'|', S,E);
 
-        if (path != null) {
-            System.out.println("Path found!");
-            for (char[] row : maze3) {
-                System.out.println(new String(row));
+        if(!points.isEmpty()) {
+            for(Point p : points) {
+                System.out.println(maze[p.x][p.y]);
             }
-        } else {
-            System.out.println("No path found.");
+            System.out.println(points);
+        }else {
+            System.out.println("No solution");
         }
+
     }
 
     static int[][] dir = {
@@ -47,6 +49,7 @@ public class Main {
             {0, 1},
             {0, -1}
     };
+    static Stack<Point> path = new Stack<>();
 
     public static boolean walk(char[][] maze, char wall, Point current, Point End, boolean[][] seen,
                                Stack<Point> path) {
@@ -87,45 +90,23 @@ public class Main {
         return false;
     }
 
-    public static Stack<Point> solve(char[][] maze, char wall, Point Start, Point End) {
+    public static List<Point> solve(char[][] maze, char wall, Point Start, Point End) {
 
       boolean[][] seen = new boolean[maze.length][maze[0].length];
-        Stack<Point> path = new Stack<>();
+
+        List<Point> solution = new ArrayList();
 
         if (walk(maze, wall, Start, End, seen, path)) {
             // Mark the path
             while (!path.isEmpty()) {
-                Point p = path.pop();
-                if (maze[p.x][p.y] != 'S' && maze[p.x][p.y] != 'E') {
-                    maze[p.x][p.y] = '*';
-                }
+                solution.add(path.pop());
             }
-            return path;
+            return solution;
         }
-        return null; // No path found
+        return solution; // No path found
     }
 
 
-    public static int[] findNextNode(int[] checkAround, char[][] maze) {
-
-        int y = checkAround[0];
-        int x = checkAround[1];
-
-        if (maze[y][x + 1] == ' ') {
-            return new int[]{y, x + 1};
-        }
-
-        if (maze[y][x - 1] == ' ') {
-            return new int[]{y, x - 1};
-        }
-        if (maze[y + 1][x] == ' ') {
-            return new int[]{y + 1, x};
-        }
-        if (maze[y - 1][x] == ' ') {
-            return new int[]{y - 1, x};
-        }
-        return null;
-    }
 
 
     public static Point findS(char[][] maze) {
