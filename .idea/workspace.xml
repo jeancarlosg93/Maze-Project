@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48415258-17c1-4a48-b2e4-3785a3e82177" name="Changes" comment="Added Project instructions.md" />
+    <list default="true" id="48415258-17c1-4a48-b2e4-3785a3e82177" name="Changes" comment="Added Project instructions.md">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,18 +66,16 @@
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/jeanc/Code/Maze traversing project/src/Main.java",
     "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "reference.settings.grazie.pro.style",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="QodanaReportsService">
-    <option name="descriptions">
-      <ReportDescription localRun="true" path="C:\Users\jeanc\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="4c4440ba-efc5-4b5d-b1b6-b01d83ce9732" reportId="Maze-Project/qodana/2024-07-28" />
-    </option>
-  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jeanc\IdeaProjects\Maze-Project" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -113,6 +113,11 @@
       <workItem from="1723644877102" duration="4900000" />
       <workItem from="1723662906033" duration="1060000" />
       <workItem from="1723688671346" duration="600000" />
+      <workItem from="1723689342125" duration="25000" />
+      <workItem from="1723759940091" duration="4000" />
+      <workItem from="1723760004450" duration="527000" />
+      <workItem from="1723815913584" duration="419000" />
+      <workItem from="1723816341599" duration="51000" />
     </task>
     <task id="LOCAL-00001" summary="created methods to find S and E">
       <option name="closed" value="true" />
@@ -146,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723689266678</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added Project instructions.md">
+      <option name="closed" value="true" />
+      <created>1723689361898</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1723689361898</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

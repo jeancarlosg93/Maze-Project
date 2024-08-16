@@ -60,11 +60,11 @@ public class Main {
                 current.y < 0 || current.y >= maze[0].length) {
             return false;
         }
-        //2. it's a wall
+        //2. it is a wall
         if (maze[current.x][current.y] == wall) {
             return false;
         }
-        //3. it's the end
+        //3. it is the end
         if (current.x == End.x && current.y == End.y) {
             path.push(current);
             return true;
@@ -73,7 +73,7 @@ public class Main {
         if (seen[current.x][current.y]) {
             return false;
         }
-        //recursion
+
         //pre
         seen[current.x][current.y] = true;
         path.push(current);
@@ -94,7 +94,7 @@ public class Main {
 
       boolean[][] seen = new boolean[maze.length][maze[0].length];
 
-        List<Point> solution = new ArrayList();
+        List<Point> solution = new ArrayList<>();
 
         if (walk(maze, wall, Start, End, seen, path)) {
             // Mark the path
