@@ -1,68 +1,50 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
 
 public class Main {
-    public static void main(String[] args) {
-        char[][] maze3 = FileReader.readFile("maze");
-        List<Point> mazetolist = new ArrayList<>();
 
-        char[][] maze1 = {
-                {'|', '|', '|', '|', '|',},
-                {'|', 'S', '|', '|', '|',}, // s location = myarray [1,1];
-                {'|', ' ', '|', '|', '|',}, // path [2,1][3,1][3,2]
-                {'|', ' ', ' ', 'E', '|',}, // e location = myarray [3,3]
-                {'|', '|', '|', '|', '|',}
-        };
+    static Stack<Point> path = new Stack<>();
 
-        char[][] maze =
-                {
-                        {'|', '|', '|', '|', '|', '|', '|', '|', '|', '|',},
-                        {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|',},
-                        {'|', 'S', '|', '|', '|', '|', '|', '|', ' ', '|',},
-                        {'|', ' ', '|', ' ', ' ', ' ', ' ', ' ', ' ', '|',},
-                        {'|', ' ', '|', 'E', '|', '|', '|', '|', ' ', '|',},
-                        {'|', ' ', '|', ' ', '|', '|', '|', '|', ' ', '|',},
-                        {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|',},
-                        {'|', '|', '|', '|', '|', '|', '|', '|', '|', '|',}
-                };
-
-        for (int i = 0; i < maze1.length; i++) {
-            for (int j = 0; j < maze1[i].length; j++) {
-                mazetolist.add(new Point(i, j, maze1[i][j]));
-            }
-        }
-
-        for (Point p : mazetolist) {
-            System.out.println(p);
-        }
-
-
-        Point S = findS(maze1);
-        Point E = findE(maze1);
-        List<Point> solution = solve(maze1, '|', S, E);
-
-        for (Point p : solution) {
-            if (maze1[p.x][p.y] == ' ') {
-                maze1[p.x][p.y] = '*';
-            }
-        }
-
-        for (char[] row : maze1) {
-            System.out.println(new String(row));
-        }
-
-    }
-
-    static int[][] dir = {
+    static int[][] directions = {
             {1, 0},//up
             {-1, 0},//down
             {0, 1},//right
             {0, -1}//left
     };
 
-    static Stack<Point> path = new Stack<>();
+    public static void main(String[] args) {
+        char[][] maze = selectAmaze(1);
+        List<Point> startAndEndCoordinates = findStartAndEndCoordinates(maze);
+        List<Point> solution = solve(maze, '|', startAndEndCoordinates.get(0), startAndEndCoordinates.get(1));
+
+        for (Point p : solution) {
+            if (maze[p.x][p.y] == ' ') {
+                maze[p.x][p.y] = '*';
+            }
+        }
+
+        for (char[] row : maze) {
+            System.out.println(new String(row));
+        }
+
+    }
+
+    public static List<Point> solve(char[][] maze, char wall, Point Start, Point End) {
+
+        boolean[][] seen = new boolean[maze.length][maze[0].length];
+
+        List<Point> solution = new ArrayList<>();
+
+        if (walk(maze, wall, Start, End, seen, path)) {
+            // Convert from Stack to List
+            while (!path.isEmpty()) {
+                solution.add(path.pop());
+            }
+            return solution;
+        }
+        return solution; // No path found
+
+    }
 
     public static boolean walk(char[][] maze, char wall, Point current, Point End, boolean[][] seen,
                                Stack<Point> path) {
@@ -91,7 +73,7 @@ public class Main {
         path.push(current);
 
         //Recurse
-        for (int[] dir : dir) {
+        for (int[] dir : directions) {
             Point newCurrent = new Point(current.x + dir[0], current.y + dir[1], maze[current.x + dir[0]][current.y + dir[1]]);
             if (walk(maze, wall, newCurrent, End, seen, path)) {
                 return true;
@@ -102,48 +84,53 @@ public class Main {
         return false;
     }
 
-    public static List<Point> solve(char[][] maze, char wall, Point Start, Point End) {
-
-        boolean[][] seen = new boolean[maze.length][maze[0].length];
-
-        List<Point> solution = new ArrayList<>();
-
-        if (walk(maze, wall, Start, End, seen, path)) {
-            // Convert from Stack to List
-            while (!path.isEmpty()) {
-                solution.add(path.pop());
-
-            }
-            return solution;
-        }
-        return solution; // No path found
-    }
-
-
-    public static Point findS(char[][] maze) {
-        Point s = null;
+    public static List<Point> findStartAndEndCoordinates(char[][] maze) {
+        List<Point> SandE = new ArrayList<>();
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[i].length; j++) {
                 if (maze[i][j] == 'S') {
-                    return new Point(i, j, maze[i][j]);
+                    SandE.add(0, new Point(i, j, maze[i][j]));
                 }
-            }
-        }
-        return null;
-    }
-
-    public static Point findE(char[][] maze) {
-        Point e = null;
-        for (int i = 0; i < maze.length; i++) {
-            for (int j = 0; j < maze[i].length; j++) {
                 if (maze[i][j] == 'E') {
-                    return new Point(i, j, maze[i][j]);
-
+                    SandE.add(1, new Point(i, j, maze[i][j]));
                 }
             }
         }
-        return null;
+        return SandE;
     }
 
+    public static char[][] selectAmaze(int choice) {
+        char[][] maze = new char[0][0];
 
+        switch (choice) {
+            case 1:
+                maze = FileReader.readFile("maze");
+                break;
+            case 2:
+                maze = new char[][]
+                        {
+                                {'|', '|', '|', '|', '|',},
+                                {'|', 'S', '|', '|', '|',}, // s location = myarray [1,1];
+                                {'|', ' ', '|', '|', '|',}, // path [2,1][3,1][3,2]
+                                {'|', ' ', ' ', 'E', '|',}, // e location = myarray [3,3]
+                                {'|', '|', '|', '|', '|',}
+                        };
+                break;
+            case 3:
+                maze = new char[][]
+                        {
+                                {'|', '|', '|', '|', '|', '|', '|', '|', '|', '|',},
+                                {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|',},
+                                {'|', 'S', '|', '|', '|', '|', '|', '|', ' ', '|',},
+                                {'|', ' ', '|', ' ', ' ', ' ', ' ', ' ', ' ', '|',},
+                                {'|', ' ', '|', 'E', '|', '|', '|', '|', ' ', '|',},
+                                {'|', ' ', '|', ' ', '|', '|', '|', '|', ' ', '|',},
+                                {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|',},
+                                {'|', '|', '|', '|', '|', '|', '|', '|', '|', '|',}
+                        };
+                break;
+        }
+        return maze;
+    }
 }
+
