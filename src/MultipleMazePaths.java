@@ -38,7 +38,7 @@ public class MultipleMazePaths {
             allPaths.add(new ArrayList<>(currentPath));
         } else {
             for (int[] d : dir) {
-                Point next = new Point(current.x + d[0], current.y + d[1]);
+                Point next = new Point(current.x + d[0], current.y + d[1], maze[current.x][current.y]);
                 walkAndFindAllPaths(maze, wall, next, end, seen, currentPath, allPaths);
             }
         }
@@ -82,8 +82,8 @@ public class MultipleMazePaths {
                         {'|', '|', '|', '|', '|', '|', '|', '|', '|', '|',}
                 };
         char wall = '|';
-        Point start = new Point(2, 1);
-        Point end = new Point(4, 3);
+        Point start = new Point(2, 1, 'S');
+        Point end = new Point(4, 3, 'E');
 
         List<List<Point>> allPaths = findAllPaths(maze, wall, start, end);
         displayPaths(maze, allPaths);
