@@ -5,6 +5,7 @@ public class Main {
 
     static Stack<Point> path = new Stack<>();
 
+    //this global variable determines the lookup direction of the walk() function
     static int[][] directions = {
             {1, 0},//up
             {-1, 0},//down
@@ -13,9 +14,16 @@ public class Main {
     };
 
     public static void main(String[] args) {
+
         char[][] maze = selectAmaze(1);
+
+        //here we contain the Start and End coordinates.
+        //it should be size 2 index 0  contains S and index1 contains E
         List<Point> startAndEndCoordinates = findStartAndEndCoordinates(maze);
+
+
         List<Point> solution = solve(maze, '|', startAndEndCoordinates.get(0), startAndEndCoordinates.get(1));
+
 
         for (Point p : solution) {
             if (maze[p.x][p.y] == ' ') {
@@ -29,6 +37,8 @@ public class Main {
 
     }
 
+    //this function is responsible for providing all working variables of the walk function
+    //also it converts the Path stack into a list
     public static List<Point> solve(char[][] maze, char wall, Point Start, Point End) {
 
         boolean[][] seen = new boolean[maze.length][maze[0].length];
@@ -46,6 +56,8 @@ public class Main {
 
     }
 
+    //this function is in charge of visiting nodes, checking if nodes around are walls, visited nodes or open path.
+    //if the exit is found the path will remain in the stack.
     public static boolean walk(char[][] maze, char wall, Point current, Point End, boolean[][] seen,
                                Stack<Point> path) {
         //Base Cases
@@ -84,6 +96,7 @@ public class Main {
         return false;
     }
 
+    // Find S and E inside the map.
     public static List<Point> findStartAndEndCoordinates(char[][] maze) {
         List<Point> SandE = new ArrayList<>();
         for (int i = 0; i < maze.length; i++) {
@@ -99,6 +112,7 @@ public class Main {
         return SandE;
     }
 
+    //For testing only, choose from different mazes.
     public static char[][] selectAmaze(int choice) {
         char[][] maze = new char[0][0];
 
