@@ -1,65 +1,156 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
-    static Stack<Point> path = new Stack<>();
+    static List<Point> path = new ArrayList<>();
+    static List<List<Point>> allPaths = new ArrayList<>();
+    static int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-    //this global variable determines the lookup direction of the walk() function
-    static int[][] directions = {
-            {1, 0},//up
-            {-1, 0},//down
-            {0, 1},//right
-            {0, -1}//left
-    };
 
     public static void main(String[] args) {
+        String str;
+        Scanner input = new Scanner(System.in);
 
-        char[][] maze = selectAmaze(1);
+        while (true) {
+            System.out.println("=========== Maze Exploration Project===========");
+            System.out.print("Please select a maze or press x to exit... \n");
+            System.out.println("""
+                    1. No path maze
+                    2. One path
+                    3. Two Paths
+                    4. Five Paths
+                    5. Most Paths?
+                    6. File""");
+            System.out.print("choice: ");
 
-        //here we contain the Start and End coordinates.
-        //it should be size 2 index 0  contains S and index1 contains E
-        List<Point> startAndEndCoordinates = findStartAndEndCoordinates(maze);
+            str = input.next();
+            //Exit Condition
+            if (str.equals("x")) {
+                break;
+            }
+            //maze selection
+            int choice;
 
+            //Validate inputs
+            try {
+                choice = Integer.parseInt(str);
+                if (choice < 1 || choice > 6) {
+                    throw new NumberFormatException();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice. Please select a number between 1 and 6.");
+                continue;
+            }
 
-        List<Point> solution = solve(maze, '|', startAndEndCoordinates.get(0), startAndEndCoordinates.get(1));
+            char[][] maze = selectAmaze(choice);
 
+            System.out.print("Would you like to display all paths Y or N? ");
 
-        for (Point p : solution) {
-            if (maze[p.x][p.y] == ' ') {
-                maze[p.x][p.y] = '*';
+            str = input.next().toLowerCase();
+
+            switch (str) {
+                case "y":
+                    solve(true, maze, '|');
+                    displayPaths(maze, allPaths);
+                    System.out.println("Total paths found: " + allPaths.size() + "\n");
+                    break;
+
+                case "n":
+                    maze = selectAmaze(choice);
+                    solve(false, maze, '|');
+
+                    if (path.isEmpty()) {
+                        System.out.println("There are no paths");
+                    } else {
+                        System.out.println("\nShowing only one path: ");
+                        for (Point p : path) {
+                            if (maze[p.x][p.y] != 'S' || maze[p.x][p.y] != 'E') {
+                                maze[p.x][p.y] = '*';
+                            }
+                        }
+                        for (char[] row : maze) {
+                            System.out.println(new String(row));
+                        }
+                    }
+                    break;
+
+                default:
+                    System.out.println("Not a valid choice" + "\n");
             }
         }
-
-        for (char[] row : maze) {
-            System.out.println(new String(row));
-        }
-
     }
 
     //this function is responsible for providing all working variables of the walk function
     //also it converts the Path stack into a list
-    public static List<Point> solve(char[][] maze, char wall, Point Start, Point End) {
-
+    public static void solve(boolean walkAllPaths, char[][] maze, char wall) {
+        List<Point> startAndEndCoordinates = findStartAndEndCoordinates(maze);
         boolean[][] seen = new boolean[maze.length][maze[0].length];
 
-        List<Point> solution = new ArrayList<>();
-
-        if (walk(maze, wall, Start, End, seen, path)) {
-            // Convert from Stack to List
-            while (!path.isEmpty()) {
-                solution.add(path.pop());
-            }
-            return solution;
+        if (walkAllPaths) {
+            walkAllPaths(maze, wall, startAndEndCoordinates.get(0), startAndEndCoordinates.get(1), seen, path, allPaths);
+        } else {
+            walk(maze, wall, startAndEndCoordinates.get(0), startAndEndCoordinates.get(1), seen, path);
         }
-        return solution; // No path found
-
     }
 
-    //this function is in charge of visiting nodes, checking if nodes around are walls, visited nodes or open path.
-    //if the exit is found the path will remain in the stack.
-    public static boolean walk(char[][] maze, char wall, Point current, Point End, boolean[][] seen,
-                               Stack<Point> path) {
+    //this function is in charge of visiting nodes, checking if nodes around are walls, visited nodes, or open path.
+    //if the exit is found, the path will be added to the allPaths list.
+
+
+    public static void walkAllPaths(char[][] maze,
+                                    char wall,
+                                    Point current,
+                                    Point End,
+                                    boolean[][] seen,
+                                    List<Point> currentPath,
+                                    List<List<Point>> allPaths
+    ) {
+        //Base Cases
+        //1. Off the map
+        if (current.x < 0 || current.x >= maze.length ||
+                current.y < 0 || current.y >= maze[0].length) {
+            return;
+        }
+        //2. It is a wall
+        if (current.value == wall) {
+            return;
+        }
+
+        //3. If already seen
+        if (seen[current.x][current.y]) {
+            return;
+        }
+
+        //Adding the position to be explored and marking it as seen
+        currentPath.add(current);
+        seen[current.x][current.y] = true;
+
+        // Once the end is reached, add the path to the allPaths list
+        if (current.x == End.x && current.y == End.y) {
+            allPaths.add(new ArrayList<>(currentPath));
+        } else {
+
+            //Recursing
+            for (int[] dir : directions) {
+                Point newCurrent = new Point(current.x + dir[0], current.y + dir[1], maze[current.x + dir[0]][current.y + dir[1]]);
+                walkAllPaths(maze, wall, newCurrent, End, seen, currentPath, allPaths);
+            }
+        }
+        //backtrack to continue the search in adjacent directions.
+        currentPath.removeLast();
+        seen[current.x][current.y] = false;
+    }
+
+    //Walk only one path function
+    public static boolean walk(char[][] maze,
+                               char wall,
+                               Point current,
+                               Point End,
+                               boolean[][] seen,
+                               List<Point> path
+    ) {
         //Base Cases
         //1. Off the map
         if (current.x < 0 || current.x >= maze.length ||
@@ -72,7 +163,7 @@ public class Main {
         }
         //3. It is the end
         if (current.x == End.x && current.y == End.y) {
-            path.push(current);
+            path.add(current);
             return true;
         }
         //4. If already seen
@@ -82,7 +173,7 @@ public class Main {
 
         //Pre
         seen[current.x][current.y] = true;
-        path.push(current);
+        path.add(current);
 
         //Recurse
         for (int[] dir : directions) {
@@ -92,9 +183,10 @@ public class Main {
             }
         }
         //Post
-        path.pop();
+        path.removeLast();
         return false;
     }
+
 
     // Find S and E inside the map.
     public static List<Point> findStartAndEndCoordinates(char[][] maze) {
@@ -102,7 +194,7 @@ public class Main {
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[i].length; j++) {
                 if (maze[i][j] == 'S') {
-                    SandE.add(0, new Point(i, j, maze[i][j]));
+                    SandE.addFirst(new Point(i, j, maze[i][j]));
                 }
                 if (maze[i][j] == 'E') {
                     SandE.add(1, new Point(i, j, maze[i][j]));
@@ -118,19 +210,49 @@ public class Main {
 
         switch (choice) {
             case 1:
-                maze = FileReader.readFile("maze");
+                maze = new char[][]
+                        {
+                                {'|', '|', '|', '|', '|',},
+                                {'|', ' ', '|', ' ', '|',},
+                                {'|', 'S', '|', ' ', '|',},
+                                {'|', ' ', '|', '|', '|',},
+                                {'|', '|', '|', 'E', '|',},
+                                {'|', ' ', '|', ' ', '|',},
+                                {'|', ' ', '|', ' ', '|',},
+                                {'|', '|', '|', '|', '|',}
+                        };
                 break;
+
             case 2:
                 maze = new char[][]
                         {
                                 {'|', '|', '|', '|', '|',},
-                                {'|', 'S', '|', '|', '|',}, // s location = myarray [1,1];
-                                {'|', ' ', '|', '|', '|',}, // path [2,1][3,1][3,2]
-                                {'|', ' ', ' ', 'E', '|',}, // e location = myarray [3,3]
+                                {'|', ' ', '|', ' ', '|',},
+                                {'|', 'S', '|', ' ', '|',},
+                                {'|', ' ', '|', '|', '|',},
+                                {'|', ' ', '|', 'E', '|',},
+                                {'|', ' ', '|', ' ', '|',},
+                                {'|', ' ', ' ', ' ', '|',},
                                 {'|', '|', '|', '|', '|',}
                         };
                 break;
             case 3:
+
+                maze = new char[][]
+                        {
+                                {'|', '|', '|', '|', '|',},
+                                {'|', ' ', ' ', ' ', '|',},
+                                {'|', 'S', '|', ' ', '|',},
+                                {'|', ' ', '|', ' ', '|',},
+                                {'|', ' ', '|', 'E', '|',},
+                                {'|', ' ', '|', ' ', '|',},
+                                {'|', ' ', ' ', ' ', '|',},
+                                {'|', '|', '|', '|', '|',}
+                        };
+                break;
+
+            case 4:
+
                 maze = new char[][]
                         {
                                 {'|', '|', '|', '|', '|', '|', '|', '|', '|', '|',},
@@ -143,8 +265,53 @@ public class Main {
                                 {'|', '|', '|', '|', '|', '|', '|', '|', '|', '|',}
                         };
                 break;
+
+            case 5:
+                maze = new char[][]
+                        {
+                                {'|', '|', '|', '|', '|', '|', '|', '|', '|', '|', '|', '|', '|', '|'},
+                                {'|', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|', '|', '|', '|'},
+                                {'|', ' ', '|', '|', '|', '|', '|', '|', '|', ' ', '|', '|', '|', '|'},
+                                {'|', ' ', '|', '|', '|', '|', '|', '|', '|', ' ', '|', '|', '|', '|'},
+                                {'|', ' ', '|', '|', '|', '|', '|', '|', '|', ' ', ' ', ' ', ' ', '|'},
+                                {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|', '|', '|', ' ', '|'},
+                                {'|', '|', '|', '|', '|', '|', '|', '|', ' ', '|', '|', '|', ' ', '|'},
+                                {'|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
+                                {'|', '|', '|', '|', '|', '|', '|', ' ', '|', '|', '|', '|', ' ', '|'},
+                                {'|', ' ', ' ', ' ', ' ', ' ', '|', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
+                                {'|', '|', '|', '|', '|', '|', '|', ' ', '|', '|', '|', '|', ' ', '|'},
+                                {'|', '|', '|', '|', '|', '|', '|', ' ', ' ', ' ', ' ', ' ', ' ', '|'},
+                                {'|', '|', '|', '|', '|', '|', '|', '|', '|', '|', '|', '|', 'E', '|'}
+                        };
+                break;
+
+            case 6:
+                maze = FileReader.readFile("maze");
+                break;
         }
         return maze;
+    }
+
+    //Displaying all paths in the terminal
+    public static void displayPaths(char[][] maze, List<List<Point>> paths) {
+        for (int i = 0; i < paths.size(); i++) {
+            char[][] mazeCopy = new char[maze.length][maze[0].length];
+            for (int j = 0; j < maze.length; j++) {
+                mazeCopy[j] = maze[j].clone();
+            }
+
+            for (Point p : paths.get(i)) {
+                if (mazeCopy[p.x][p.y] != 'S' && mazeCopy[p.x][p.y] != 'E') {
+                    mazeCopy[p.x][p.y] = '*';
+                }
+            }
+
+            System.out.println("Path " + (i + 1) + ":");
+            for (char[] row : mazeCopy) {
+                System.out.println(new String(row));
+            }
+            System.out.println();
+        }
     }
 }
 
