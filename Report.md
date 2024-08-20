@@ -1,3 +1,14 @@
+# Maze Project
+#### Jean Carlos Guzman Student#: 2495044
+
+## Big O analysis
+The ```walkAllPaths() ``` function has exponential complexity of O(4^n*m) where n and m represent the width and height of the maze. All paths will be explored.
+The ```walk() ``` complexity of O(4^min(n×m,P) where P represents the length of the path. Even though the function may explore a big chunk of the maze, it will stop once the end is reached.
+
+
+## code
+### Main.java
+```java
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -98,8 +109,7 @@ public class Main {
 
     //This function is in charge of visiting nodes, checking if nodes around are walls, visited nodes, or open path.
     //If the exit is found, the path will be added to the allPaths list.
-    //complexity of O(4^n*m) where n and m represent the width and height of the maze.
-    // All paths will be explored.
+    //complexity of O(4^n*m) where n and m represent the width and height of the maze. All paths will be explored.
     public static void walkAllPaths(char[][] maze,
                                     char wall,
                                     Point current,
@@ -135,8 +145,7 @@ public class Main {
 
             //Recursing
             for (int[] dir : directions) {
-                Point newCurrent = new Point(current.x + dir[0], current.y + dir[1],
-                        maze[current.x + dir[0]][current.y + dir[1]]);
+                Point newCurrent = new Point(current.x + dir[0], current.y + dir[1], maze[current.x + dir[0]][current.y + dir[1]]);
                 walkAllPaths(maze, wall, newCurrent, End, seen, currentPath, allPaths);
             }
         }
@@ -182,8 +191,7 @@ public class Main {
 
         //Recurse
         for (int[] dir : directions) {
-            Point newCurrent = new Point(current.x + dir[0], current.y + dir[1],
-                    maze[current.x + dir[0]][current.y + dir[1]]);
+            Point newCurrent = new Point(current.x + dir[0], current.y + dir[1], maze[current.x + dir[0]][current.y + dir[1]]);
             if (walk(maze, wall, newCurrent, End, seen, path)) {
                 return true;
             }
@@ -303,3 +311,246 @@ public class Main {
     }
 }
 
+
+```
+
+## FileReader.java
+```java
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class FileReader {
+
+    public static char[][] readFile(String path) {
+        List<String> list = new ArrayList<>();
+
+        try{
+
+            File txtfile = new File(path);
+            Scanner reader = new Scanner(txtfile);
+            while(reader.hasNextLine()){
+                String line = reader.nextLine();
+                list.add(line);
+            }
+            reader.close();
+        }
+
+        catch (FileNotFoundException e){
+            System.err.println("File not found");
+        }
+
+        return list.stream().map(String::toCharArray).toArray(char[][]::new);
+    }
+
+}
+
+```
+## Example maze inside the text file.
+```
+S||||||||||||||||||||||||||||||
+               |              |
+||||||||||  |  ||||  |  |||||||
+|           |  |     |  |     |
+||||  |  ||||  |  |  |||||||  |
+|     |     |  |  |     |     |
+|  ||||  ||||||||||  |||||||  |
+|  |           |        |     |
+|  ||||  |||||||  |||||||  |  |
+|     |  |  |              |  |
+|  |  |  |  |  ||||||||||||||||
+|  |  |     |     |     |     |
+|  ||||  ||||  ||||  |  |  ||||
+|  |              |  |     |  |
+||||  |  ||||||||||  |||||||  |
+|     |     | ||              |
+|  ||||  |  | |||||  ||||  ||||
+|     |  |  | ||| |     |     |
+|  |  ||||  | ||| ||||  |  ||||
+|  |  |                 |     E
+|||||||||||||||||||||||||||||||
+```
+## Screenshots
+![img.png](img.png)
+
+![img_1.png](img_1.png)
+
+![img_2.png](img_2.png)
+
+![img_3.png](img_3.png)
+
+
+
+```
+choice: 5
+Would you like to display all paths Y or N? y
+Path 1:
+||||||||||||||
+|S        ||||
+|*||||||| ||||
+|*||||||| ||||
+|*|*|||||    |
+|* *     ||| |
+|***|||| ||| |
+|            |
+||||||| |||| |
+|     |      |
+||||||| |||| |
+|||||||      |
+||||||||||||E|
+
+Path 2:
+||||||||||||||
+|S        ||||
+|*||||||| ||||
+|*||||||| ||||
+|*|*|||||    |
+|* *     ||| |
+|***|||| ||| |
+|            |
+||||||| |||| |
+|     |      |
+||||||| |||| |
+|||||||      |
+||||||||||||E|
+
+Path 3:
+||||||||||||||
+|S**      ||||
+|*|*||||| ||||
+| |*||||| ||||
+| |*|||||    |
+|        ||| |
+|||||||| ||| |
+|            |
+||||||| |||| |
+|     |      |
+||||||| |||| |
+|||||||      |
+||||||||||||E|
+
+Path 4:
+||||||||||||||
+|S        ||||
+|*||||||| ||||
+|*||||||| ||||
+|*|*|||||    |
+|********||| |
+|***||||*||| |
+|       *****|
+||||||| ||||*|
+|     |     *|
+||||||| ||||*|
+|||||||     *|
+||||||||||||E|
+
+Path 5:
+||||||||||||||
+|S        ||||
+|*||||||| ||||
+|*||||||| ||||
+|*|*|||||    |
+|********||| |
+|***||||*||| |
+|       *****|
+||||||| ||||*|
+|     |******|
+|||||||*|||| |
+|||||||******|
+||||||||||||E|
+
+Path 6:
+||||||||||||||
+|S        ||||
+|*||||||| ||||
+|*||||||| ||||
+|*|*|||||    |
+|********||| |
+|***||||*||| |
+|      **    |
+|||||||*|||| |
+|     |*     |
+|||||||*|||| |
+|||||||******|
+||||||||||||E|
+
+Path 7:
+||||||||||||||
+|S        ||||
+|*||||||| ||||
+|*||||||| ||||
+|*|*|||||    |
+|********||| |
+|***||||*||| |
+|      **    |
+|||||||*|||| |
+|     |******|
+||||||| ||||*|
+|||||||     *|
+||||||||||||E|
+
+Path 8:
+||||||||||||||
+|S********||||
+|*|||||||*||||
+|*|||||||*||||
+|*|*|||||****|
+|* *     |||*|
+|***|||| |||*|
+|           *|
+||||||| ||||*|
+|     |     *|
+||||||| ||||*|
+|||||||     *|
+||||||||||||E|
+
+Path 9:
+||||||||||||||
+|S********||||
+|*|||||||*||||
+|*|||||||*||||
+|*|*|||||****|
+|* *     |||*|
+|***|||| |||*|
+|           *|
+||||||| ||||*|
+|     |******|
+|||||||*|||| |
+|||||||******|
+||||||||||||E|
+
+Path 10:
+||||||||||||||
+|S********||||
+|*|||||||*||||
+|*|||||||*||||
+|*|*|||||****|
+|* *     |||*|
+|***|||| |||*|
+|      ******|
+|||||||*|||| |
+|     |*     |
+|||||||*|||| |
+|||||||******|
+||||||||||||E|
+
+Path 11:
+||||||||||||||
+|S********||||
+|*|||||||*||||
+|*|||||||*||||
+|*|*|||||****|
+|* *     |||*|
+|***|||| |||*|
+|      ******|
+|||||||*|||| |
+|     |******|
+||||||| ||||*|
+|||||||     *|
+||||||||||||E|
+
+Total paths found: 11
+
+```
