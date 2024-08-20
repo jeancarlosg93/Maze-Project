@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48415258-17c1-4a48-b2e4-3785a3e82177" name="Changes" comment="Added Project instructions.md">
-      <change afterPath="$PROJECT_DIR$/src/FileReaderToList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FindNextNode.java" beforeDir="false" />
+    <list default="true" id="48415258-17c1-4a48-b2e4-3785a3e82177" name="Changes" comment="Implemented finding all paths and a user interface">
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Queue.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +149,7 @@
       <workItem from="1723825959196" duration="2804000" />
       <workItem from="1723928542415" duration="1914000" />
       <workItem from="1723948109353" duration="429000" />
-      <workItem from="1724099644598" duration="16855000" />
+      <workItem from="1724099644598" duration="17799000" />
     </task>
     <task id="LOCAL-00001" summary="created methods to find S and E">
       <option name="closed" value="true" />
@@ -211,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723927869101</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Implemented finding all paths and a user interface">
+      <option name="closed" value="true" />
+      <created>1724127805750</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724127805750</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,7 +226,8 @@
     <MESSAGE value="explore neighbors" />
     <MESSAGE value="Added Project instructions.md" />
     <MESSAGE value="some refactoring and optimizations. TODO read from list" />
-    <option name="LAST_COMMIT_MESSAGE" value="some refactoring and optimizations. TODO read from list" />
+    <MESSAGE value="Implemented finding all paths and a user interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented finding all paths and a user interface" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
