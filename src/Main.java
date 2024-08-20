@@ -53,15 +53,6 @@ public class Main {
 
             str = input.next().toLowerCase();
 
-//            try {
-//                if (!str.equals("y")||!str.equals("n")) {
-//                    throw new InvalidCharacterException();
-//                }
-//
-//            } catch (InvalidCharacterException e) {
-//                System.out.println("Invalid choice. Please select Select Y or N.");
-//                continue;
-//            }
 
             switch (str) {
                 case "y":
