@@ -14,13 +14,15 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         while (true) {
+            path.clear();
+            allPaths.clear();
             System.out.println("=========== Maze Exploration Project===========");
             System.out.print("Please select a maze or press x to exit... \n");
             System.out.println("""
                     1. No path maze
                     2. One path
                     3. Two Paths
-                    4. Five Paths
+                    4. Four Paths
                     5. Most Paths?
                     6. File""");
             System.out.print("choice: ");
@@ -51,6 +53,16 @@ public class Main {
 
             str = input.next().toLowerCase();
 
+//            try {
+//                if (!str.equals("y")||!str.equals("n")) {
+//                    throw new InvalidCharacterException();
+//                }
+//
+//            } catch (InvalidCharacterException e) {
+//                System.out.println("Invalid choice. Please select Select Y or N.");
+//                continue;
+//            }
+
             switch (str) {
                 case "y":
                     solve(true, maze, '|');
@@ -67,7 +79,7 @@ public class Main {
                     } else {
                         System.out.println("\nShowing only one path: ");
                         for (Point p : path) {
-                            if (maze[p.x][p.y] != 'S' || maze[p.x][p.y] != 'E') {
+                            if (maze[p.x][p.y] != 'S' && maze[p.x][p.y] != 'E') {
                                 maze[p.x][p.y] = '*';
                             }
                         }
@@ -200,7 +212,7 @@ public class Main {
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[i].length; j++) {
                 if (maze[i][j] == 'S') {
-                    SandE.addFirst(new Point(i, j, maze[i][j]));
+                    SandE.add(0,new Point(i, j, maze[i][j]));
                 }
                 if (maze[i][j] == 'E') {
                     SandE.add(1, new Point(i, j, maze[i][j]));
